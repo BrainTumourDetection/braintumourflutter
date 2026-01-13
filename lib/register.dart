@@ -1,4 +1,5 @@
 import 'package:braintumour/login.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class Registerpage extends StatefulWidget {
@@ -7,6 +8,9 @@ class Registerpage extends StatefulWidget {
   @override
   State<Registerpage> createState() => _RegisterpageState();
 }
+
+final dio=Dio();
+final baseurl='http://192.168.1.32:5000';
 
 class _RegisterpageState extends State<Registerpage> {
   final TextEditingController name = TextEditingController();
@@ -18,6 +22,42 @@ class _RegisterpageState extends State<Registerpage> {
 
   final formkey = GlobalKey<FormState>();
   String selectedGender = 'Male';
+Future<void> post_reg(context) async{
+  try{
+    final response= await dio.post(
+      '$baseurl/student_API',
+      data: {
+'Name':name.text,
+'Age' :age.text,
+'PhNumber' :phone.text,
+'Email' :email.text,
+'Address' :address.text,
+'Gender' :selectedGender,
+'Username' :email.text,
+'Password' :password.text,
+
+      },
+    
+    );
+    print(response.data);
+    if (response.statusCode == 200 || response.statusCode == 201){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder:(context) => Loginpage()),
+      );
+      ScaffoldMessenger.of(
+        context,
+        ).showSnackBar(SnackBar(content: Text('registration succesfull')));
+        
+    }
+    else {
+           ScaffoldMessenger.of(
+        context,
+        ).showSnackBar(SnackBar(content: Text('registration failed')));
+        }
+  }catch (e) {}
+}
+
 
   @override
   Widget build(BuildContext context) {
