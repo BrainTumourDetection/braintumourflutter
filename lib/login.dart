@@ -1,3 +1,4 @@
+import 'package:braintumour/post.dart';
 import 'package:braintumour/register.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,38 @@ class Loginpage extends StatelessWidget {
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final formkey = GlobalKey<FormState>();
+
+
+  Future<void> post_login(context) async{
+  try{
+    final response= await dio.post(
+      '$baseurl/loginapi',
+
+data: {
+ 'Username':username.text,
+ 'Password':password.text,
+}
+    
+    );
+    print(response.data);
+    if (response.statusCode == 200 || response.statusCode == 201){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder:(context) => ViewPost()),
+      );
+      ScaffoldMessenger.of(
+        context,
+        ).showSnackBar(SnackBar(content: Text('login succesfull')));
+        
+    }
+    else {
+           ScaffoldMessenger.of(
+        context,
+        ).showSnackBar(SnackBar(content: Text('login failed')));
+        }
+  }catch (e) {print(e);}
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,12 +130,7 @@ class Loginpage extends StatelessWidget {
                           ),
                           onPressed: () {
                             if (formkey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Registerpage(),
-                                ),
-                              );
+                             post_login(context);
                             }
                           },
                           child: const Text(

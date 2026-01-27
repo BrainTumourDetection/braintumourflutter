@@ -1,5 +1,6 @@
 import 'package:braintumour/appoinment.dart';
 import 'package:braintumour/booked.dart';
+import 'package:braintumour/home.dart';
 import 'package:braintumour/login.dart';
 import 'package:braintumour/notification.dart';
 import 'package:braintumour/post.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:Booked(),
+      home:HomePage(),
     );
   }
 }

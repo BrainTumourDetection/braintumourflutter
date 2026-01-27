@@ -124,7 +124,7 @@ class _BookedState extends State<Booked> {
       height: 40,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: const Color.fromARGB(255, 140, 198, 239),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

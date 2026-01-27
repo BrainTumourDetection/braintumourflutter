@@ -10,7 +10,7 @@ class Registerpage extends StatefulWidget {
 }
 
 final dio=Dio();
-final baseurl='http://192.168.1.32:5000';
+final baseurl='http://192.168.1.124:5000';
 
 class _RegisterpageState extends State<Registerpage> {
   final TextEditingController name = TextEditingController();
@@ -25,10 +25,10 @@ class _RegisterpageState extends State<Registerpage> {
 Future<void> post_reg(context) async{
   try{
     final response= await dio.post(
-      '$baseurl/student_API',
+      '$baseurl/patientapi',
       data: {
 'Name':name.text,
-'Age' :age.text,
+'Age' :age.text,  
 'PhNumber' :phone.text,
 'Email' :email.text,
 'Address' :address.text,
@@ -55,7 +55,7 @@ Future<void> post_reg(context) async{
         context,
         ).showSnackBar(SnackBar(content: Text('registration failed')));
         }
-  }catch (e) {}
+  }catch (e) {print(e);}
 }
 
 
@@ -202,12 +202,7 @@ Future<void> post_reg(context) async{
                             ),
                             onPressed: () {
                               if (formkey.currentState!.validate()) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Loginpage(),
-                                  ),
-                                );
+                              post_reg(context);
                               }
                             },
                             child: const Text(
