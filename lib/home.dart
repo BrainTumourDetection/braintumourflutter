@@ -1,5 +1,7 @@
 import 'package:braintumour/appoinment.dart';
 import 'package:braintumour/booked.dart';
+import 'package:braintumour/detection.dart';
+import 'package:braintumour/notification.dart';
 import 'package:braintumour/prescrip.dart';
 import 'package:braintumour/review.dart';
 import 'package:flutter/material.dart';
@@ -62,11 +64,17 @@ class HomePage extends StatelessWidget {
                     context,
                     const Appoinment(),
                   ),
+                  // _buildMenuItem(
+                  //   Icons.local_hospital,
+                  //   "Notifications",
+                  //   context,
+                  //   // const Prescrip(),
+                  // ),
                   _buildMenuItem(
                     Icons.local_hospital,
                     "Prescription",
                     context,
-                    const Prescrip(),
+                    const NotificationScreen(),
                   ),
                   _buildMenuItem(
                     Icons.calendar_today,
@@ -79,6 +87,11 @@ class HomePage extends StatelessWidget {
                     "Booked",
                     context,
                     const Booked(),
+                  ), _buildMenuItem(
+                    Icons.details,
+                    "Detection",
+                    context,
+                    const TumorDetectionScreen(),
                   ),
                 ],
               ),

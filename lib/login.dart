@@ -1,14 +1,22 @@
+import 'package:braintumour/home.dart';
 import 'package:braintumour/post.dart';
 import 'package:braintumour/register.dart';
 import 'package:flutter/material.dart';
 
-class Loginpage extends StatelessWidget {
+class Loginpage extends StatefulWidget {
   Loginpage({super.key});
 
-  final TextEditingController username = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+  @override
+  State<Loginpage> createState() => _LoginpageState();
+}
+int? loginid;
 
+class _LoginpageState extends State<Loginpage> {
+  final TextEditingController username = TextEditingController();
+
+  final TextEditingController password = TextEditingController();
+
+  final formkey = GlobalKey<FormState>();
 
   Future<void> post_login(context) async{
   try{
@@ -23,9 +31,10 @@ data: {
     );
     print(response.data);
     if (response.statusCode == 200 || response.statusCode == 201){
+      loginid=response.data['login_id'];
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder:(context) => ViewPost()),
+        MaterialPageRoute(builder:(context) => HomePage()),
       );
       ScaffoldMessenger.of(
         context,
@@ -39,7 +48,6 @@ data: {
         }
   }catch (e) {print(e);}
 }
-
 
   @override
   Widget build(BuildContext context) {

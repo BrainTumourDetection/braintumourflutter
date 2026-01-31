@@ -10,7 +10,7 @@ class Registerpage extends StatefulWidget {
 }
 
 final dio=Dio();
-final baseurl='http://192.168.1.124:5000';
+final baseurl='http://192.168.1.84:5000';
 
 class _RegisterpageState extends State<Registerpage> {
   final TextEditingController name = TextEditingController();
